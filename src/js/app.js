@@ -22,7 +22,3 @@ export default function App() {
 }
 
 
-// <h1>I am App Component!!!</h1>
-// <button onClick={() => {
-//   electron.notificationApi.sendNotification('My custom notification!');
-// }}>Notify</button>

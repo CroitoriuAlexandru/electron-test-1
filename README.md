@@ -8,4 +8,3 @@
 ](https://www.udemy.com/course/electron-react-js-build-a-native-chat-app-with-javascript/?referralCode=F5BF439DB5494218B31C)
 
 https://www.youtube.com/watch?v=HtJKUQXmtok&ab_channel=CooperCodes ---> google login with react
-https://gist.github.com/bradtraversy/1c93938c1fe4f10d1e5b0532ae22e16a
