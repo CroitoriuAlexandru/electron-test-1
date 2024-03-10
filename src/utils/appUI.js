@@ -1,7 +1,10 @@
 const { BrowserWindow, app, ipcMain, Notification, BrowserView, screen } = require('electron');
 const path = require('path');
 
+const browserViewsMap = {};
+
 function createWindow() {
+
     const screenWidth = screen.getPrimaryDisplay().size['width'];
     const screenHeight = screen.getPrimaryDisplay().size['height'];
     let topHeight = 35;
@@ -23,7 +26,7 @@ function createWindow() {
     })
 
     // Views:
-    
+
     createBrowserView(
         win,
         "test/test4.html",
@@ -33,7 +36,7 @@ function createWindow() {
         screenHeight - topHeight,
         "#00FFFF"
     );
-    
+
     createBrowserView(
         win,
         "test/test2.html",
@@ -77,11 +80,11 @@ function createBrowserView(win, htmlPath, x, y, w, h, color) {
             }
         }
     );
-
     view.setBounds({ x: x, y: y, width: w, height: h })
     view.setBackgroundColor(color);
     view.webContents.loadFile(htmlPath);
+    browserViewsMap[htmlPath.match(new RegExp("[a-zA-Z0-9]*.html"))] = view.webContents.id;
     win.addBrowserView(view);
 }
 
-module.exports = { createWindow };
+module.exports = { createWindow, browserViewsMap };
