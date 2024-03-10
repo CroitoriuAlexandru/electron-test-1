@@ -8,3 +8,4 @@
 ](https://www.udemy.com/course/electron-react-js-build-a-native-chat-app-with-javascript/?referralCode=F5BF439DB5494218B31C)
 
 https://www.youtube.com/watch?v=HtJKUQXmtok&ab_channel=CooperCodes ---> google login with react
+https://www.techiediaries.com/electron-data-persistence/ ---> To target different architectures you need to rebuild SQLite for each possible architecture.
