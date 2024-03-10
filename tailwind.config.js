@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/js/**/*.js", "./src/js/**/index.html", "./node_modules/flowbite/**/*.js"],
+  content: ["./src/react/**/*.js", "./src/react/**/index.html", "./node_modules/flowbite/**/*.js"],
   darkMode: 'class',
   theme: {
     extend: {
@@ -45,6 +45,19 @@ module.exports = {
       ]
     }
   },
+  safelist: [
+    'bg-neutral-50',
+    'bg-neutral-100',
+    'bg-neutral-200',
+    'bg-neutral-300',
+    'bg-neutral-400',
+    'bg-neutral-500',
+    'bg-neutral-600',
+    'bg-neutral-700',
+    'bg-neutral-800',
+    'bg-neutral-900',
+    'bg-neutral-950',
+  ],
   plugins: [
     require('flowbite/plugin')
   ],

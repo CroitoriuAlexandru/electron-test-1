@@ -9,3 +9,7 @@
 
 https://www.youtube.com/watch?v=HtJKUQXmtok&ab_channel=CooperCodes ---> google login with react
 https://www.techiediaries.com/electron-data-persistence/ ---> To target different architectures you need to rebuild SQLite for each possible architecture.
+
+### command to rebuild sqlite3
+
+./node_modules/.bin/electron-rebuild -f -w sqlite3

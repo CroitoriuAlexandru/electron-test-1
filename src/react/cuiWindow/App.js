@@ -4,8 +4,8 @@ import React from 'react';
 export default function App() {
 
   return (
-    <main class="p-4 md:ml-64 h-auto pt-20">
-      <form class="max-w-md mb-3 " onSubmit={handleSubmit}>
+    <main class="p-4 pt-20 bg-neutral-200 w-[100vw] h-[100vh]">
+      <form class="mb-3 " onSubmit={handleSubmit}>
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
           <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

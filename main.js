@@ -2,7 +2,7 @@
 const { BrowserWindow, app, ipcMain, Notification, BrowserView } = require('electron');
 const path = require('path');
 const { createWindow } = require('./src/utils/appUI');
-
+const { createTopBarView } = require('./src/utils/appUI');
 const isDev = !app.isPackaged;
 let win;
 
@@ -37,10 +37,8 @@ ipcMain.handle('my-invokable-ipc', (event, args) => {
 })
 
 app.whenReady().then(() => {
-  
   win = createWindow();
   win.loadFile('build/base.html');
-  createBrowserView("build/topBar.html", 0, 0, 1200, 100);
-  // createBrowserView("build/topBar.html", 0, 0, "1200", "100");
-
+}).then(() => {
+  createTopBarView(win);
 })
