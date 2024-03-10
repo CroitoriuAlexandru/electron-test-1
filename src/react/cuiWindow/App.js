@@ -1,10 +1,29 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function App() {
 
+  const [cui, setCui] = React.useState('19');
+  const [data, setData] = React.useState({});
+
+  const fetchData = async () => {
+    endpoint = "https://api.aipro.ro/get?cui=" + cui;
+    setData({ nume_companie: "Loading..." });
+    await fetch(endpoint)
+      .then(response => response.json())
+      .then(data => setData(data));
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchData();
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <main class="p-4 pt-20 bg-neutral-200 w-[100vw] h-[100vh]">
+    <div class="relative p-4">
       <form class="mb-3 " onSubmit={handleSubmit}>
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
@@ -21,7 +40,7 @@ export default function App() {
         <div
           class="border-2 border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64"
         >
-          <h1>I am App Component!!!</h1>
+          <h1 className="text-white">I am App Component!!!</h1>
           <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => {
             electron.notificationApi.sendNotification('My custom notification!');
           }}>Notify</button>
@@ -48,7 +67,7 @@ export default function App() {
       <div
         class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4"
       >
-        <h2 class="text-2xl font-extrabold dark:text-white">{data.nume_companie}</h2>
+        <h2 class="text-2xl font-extrabold dark:text-white">{data.nume_companie !== null ? data.nume_companie : "test"}</h2>
       </div>
       <div class="grid grid-cols-2 gap-4 mb-4">
         <div
@@ -81,7 +100,7 @@ export default function App() {
           class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-48 md:h-72"
         ></div>
       </div>
-    </main>
+    </div>
   )
 }
 

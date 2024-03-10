@@ -18,18 +18,18 @@ function createWindow() {
         autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,
-            worldSafeExecuteJavaScript: true,
+            worldSafeExecuteJavaScript: false,
             contextIsolation: true,
-            experimentalFeatures: true,
+            // experimentalFeatures: true,
             preload: path.join(__dirname, 'preload.js')
         }
     })
 
     // Views:
-
     createBrowserView(
         win,
-        "test/test4.html",
+        // "test/test4.html",
+        "build/cuiWindow.html",
         leftWidth,
         topHeight,
         screenWidth - leftWidth - rightWidth,
@@ -39,6 +39,7 @@ function createWindow() {
 
     createBrowserView(
         win,
+        // "test/test2.html",
         "test/test2.html",
         0,
         topHeight,
@@ -49,7 +50,7 @@ function createWindow() {
 
     createBrowserView(
         win,
-        "test/test3.html",
+        "build/rightSidebar.html",
         screenWidth - rightWidth,
         topHeight,
         rightWidth,
@@ -68,6 +69,8 @@ function createWindow() {
     );
 
     win.maximize();
+
+    win.webContents.openDevTools();
     return win;
 }
 
@@ -75,8 +78,11 @@ function createBrowserView(win, htmlPath, x, y, w, h, color) {
     let view = new BrowserView(
         {
             webPreferences: {
-                nodeIntegration: false, contextIsolation: true,
-                experimentalFeatures: true
+                nodeIntegration: true,
+                worldSafeExecuteJavaScript: false,
+                contextIsolation: true,
+                experimentalFeatures: true,
+                preload: path.join(__dirname, 'preload.js')
             }
         }
     );
@@ -84,7 +90,15 @@ function createBrowserView(win, htmlPath, x, y, w, h, color) {
     view.setBackgroundColor(color);
     view.webContents.loadFile(htmlPath);
     browserViewsMap[htmlPath.match(new RegExp("[a-zA-Z0-9]*.html"))] = view.webContents.id;
+
+
+
+
+
+
+
     win.addBrowserView(view);
+
 }
 
 module.exports = { createWindow, browserViewsMap };

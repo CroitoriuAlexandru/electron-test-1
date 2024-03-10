@@ -32,14 +32,15 @@ if (isDev) {
 }
 
 ipcMain.on('notify', (_, message) => {
+  console.log(message)
   new Notification({ title: 'Notifiation', body: message }).show();
 })
 ipcMain.handle('my-invokable-ipc', (event, args) => {
   console.log(args);
-  const view = new BrowserView();
+  // const view = new BrowserView();
 
-  view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
-  view.webContents.loadURL(args);
-  win.setBrowserView(view);
+  // view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
+  // view.webContents.loadURL(args);
+  // win.setBrowserView(view);
 
 })
