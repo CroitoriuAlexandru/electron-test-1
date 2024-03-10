@@ -1,26 +1,11 @@
 
 const { BrowserWindow, app, ipcMain, Notification, BrowserView } = require('electron');
 const path = require('path');
+const { createWindow } = require('./src/utils/appUI');
 
 const isDev = !app.isPackaged;
 let win;
-function createWindow() {
-  win = new BrowserWindow({
-    width: 1200,
-    height: 800,
-    backgroundColor: "white",
-    autoHideMenuBar: true,
-    webPreferences: {
-      nodeIntegration: true,
-      worldSafeExecuteJavaScript: true,
-      contextIsolation: true,
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
 
-  // win.loadFile('build/base.html');
-  win.loadFile('build/topBar.html');
-}
 
 function createBrowserView(htmlPath, x, y, w, h) {
   const view = new BrowserView(
@@ -52,7 +37,10 @@ ipcMain.handle('my-invokable-ipc', (event, args) => {
 })
 
 app.whenReady().then(() => {
-  createWindow();
-  createBrowserView("build/topBar.html", 0, 0, "1200", "100");
+  
+  win = createWindow();
+  win.loadFile('build/base.html');
+  createBrowserView("build/topBar.html", 0, 0, 1200, 100);
+  // createBrowserView("build/topBar.html", 0, 0, "1200", "100");
 
 })
