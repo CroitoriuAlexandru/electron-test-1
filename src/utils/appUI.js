@@ -59,7 +59,7 @@ function createWindow() {
 
     createBrowserView(
         win,
-        "test/test1.html",
+        "build/topBar.html",
         0,
         0,
         screenWidth,
