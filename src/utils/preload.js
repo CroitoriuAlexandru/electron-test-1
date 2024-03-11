@@ -23,4 +23,12 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send('notify', message);
     }
   },
+  setURL:{
+    sendURL(url){
+      ipcRenderer.send('newURL',url);
+    },
+    sendWhatsapp(){
+      ipcRenderer.send('whatsappURL',"https://web.whatsapp.com");
+    }
+  }
 });

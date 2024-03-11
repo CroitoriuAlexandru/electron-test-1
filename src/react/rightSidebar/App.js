@@ -4,13 +4,15 @@ import React from 'react';
 
 export default function App() {
 
+  const electron = window.electron;
   return (
     <div className="flex flex-col items-center h-[calc(100vh-35px)] w-[50px] py-2 ">
       {/* Office Suite */}
       <button className="w-10 h-10 my-1 hover:bg-white rounded-md flex items-center justify-center "
         onClick={() => {
-          let args = "https://www.google.com";
-          ipcRenderer.invoke('my-invokable-ipc', args)
+          electron.setURL.sendURL("https://www.google.com");
+          // electron.setURL.sendURL("https://www.whoishostingthis.com/tools/user-agent/");
+          // electron.notificationApi.sendNotification('My custom notification!');
         }}
       >
         <svg className="w-8 h-8" width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,8 +53,8 @@ export default function App() {
       {/* Gmail */}
       <button className="w-10 h-10 my-1 hover:bg-white rounded-md flex items-center justify-center "
         onClick={() => {
-          let args = "https://www.google.com";
-          ipcRenderer.invoke('my-invokable-ipc', args)
+          electron.setURL.sendURL("https://mail.google.com");
+          // electron.notificationApi.sendNotification('My custom notification!');
         }}
       >
         <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="52 42 88 66">
@@ -66,8 +68,8 @@ export default function App() {
       {/* Facebook */}
       <button className="w-10 h-10 my-1 hover:bg-white rounded-md flex items-center justify-center "
         onClick={() => {
-          let args = "https://www.google.com";
-          ipcRenderer.invoke('my-invokable-ipc', args)
+          electron.setURL.sendURL("https://www.facebook.com");
+          // electron.notificationApi.sendNotification('My custom notification!');
         }}
       >
         <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
@@ -77,8 +79,8 @@ export default function App() {
       {/* Youtube */}
       <button className="w-10 h-10 my-1 hover:bg-white rounded-md flex items-center justify-center "
         onClick={() => {
-          let args = "https://www.google.com";
-          ipcRenderer.invoke('my-invokable-ipc', args)
+          electron.setURL.sendURL("https://www.youtube.com");
+          // electron.notificationApi.sendNotification('My custom notification!');
         }}
       >
         <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
@@ -88,8 +90,8 @@ export default function App() {
       {/* Whatsup */}
       <button className="w-10 h-10 my-1 hover:bg-white rounded-md flex items-center justify-center "
         onClick={() => {
-          let args = "https://www.google.com";
-          ipcRenderer.invoke('my-invokable-ipc', args)
+          electron.setURL.sendWhatsapp();
+          // electron.notificationApi.sendNotification('My custom notification!');
         }}
       >
         <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">

@@ -57,14 +57,15 @@ function createWindow() {
         backgroundColor: "white",
         autoHideMenuBar: true,
         webPreferences: {
-            // nodeIntegration: true,
+            nodeIntegration: true,
             // worldSafeExecuteJavaScript: true,
-            // contextIsolation: true,
+            contextIsolation: true,
             // experimentalFeatures: true,
             preload: path.join(__dirname, './preload.js')
         }
     })
-    console.log(path.join(__dirname, '../../preload.js'))
+    win.webContents.openDevTools();
+    // console.log(path.join(__dirname, '../../preload.js'))
 
     for(let view of UIViews){
         createBrowserView(win, view);
@@ -121,16 +122,18 @@ function createWindow() {
     // win.webContents.openDevTools();
     return win;
 }
-
+function getBrowserViewsMap(){
+    return browserViewsMap;
+}
 function createBrowserView(win, view) {
     let newView = new BrowserView(
         {
             webPreferences: {
                 nodeIntegration: true,
-                worldSafeExecuteJavaScript: false,
+                // worldSafeExecuteJavaScript: false,
                 contextIsolation: true,
                 // experimentalFeatures: true,
-                // preload: path.join(__dirname, 'preload.js')
+                preload: path.join(__dirname, 'preload.js')
             }
         }
     );
@@ -144,4 +147,4 @@ function createBrowserView(win, view) {
 
 }
 
-module.exports = { createWindow, browserViewsMap };
+module.exports = { createWindow, getBrowserViewsMap };
