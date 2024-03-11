@@ -2,13 +2,12 @@
 const { BrowserWindow, app, ipcMain, Notification, BrowserView } = require('electron');
 const path = require('path');
 const { createWindow } = require('./src/utils/appUI');
-const { createTopBarView, createLeftSideView } = require('./src/utils/appUI');
 const isDev = !app.isPackaged;
 let win;
 
 app.whenReady().then(() => {
   win = createWindow();
-  win.loadFile('build/base.html');
+  win.loadFile('build/rightSidebar.html');
 }).then(() => {
   // createTopBarView(win);
   // createLeftSideView(win);
@@ -35,7 +34,9 @@ ipcMain.on('notify', (_, message) => {
   console.log(message)
   new Notification({ title: 'Notifiation', body: message }).show();
 })
+
 ipcMain.handle('my-invokable-ipc', (event, args) => {
+  console.log(event);
   console.log(args);
   // const view = new BrowserView();
 

@@ -5,3 +5,15 @@
 body {
 	@apply bg-gray-50 dark:bg-gray-900 antialiased;
 }
+
+*::-webkit-scrollbar-track {
+	@apply shadow-lg rounded-md;
+}
+
+*::-webkit-scrollbar {
+	@apply w-3;
+}
+
+*::-webkit-scrollbar-thumb {
+	@apply rounded-md bg-slate-100 shadow-lg;
+}

@@ -17,13 +17,14 @@ function createWindow() {
         backgroundColor: "white",
         autoHideMenuBar: true,
         webPreferences: {
-            nodeIntegration: true,
-            worldSafeExecuteJavaScript: false,
-            contextIsolation: true,
+            // nodeIntegration: true,
+            // worldSafeExecuteJavaScript: true,
+            // contextIsolation: true,
             // experimentalFeatures: true,
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './preload.js')
         }
     })
+    console.log(path.join(__dirname, '../../preload.js'))
 
     // Views:
     createBrowserView(
@@ -40,7 +41,7 @@ function createWindow() {
     createBrowserView(
         win,
         // "test/test2.html",
-        "test/test2.html",
+        "build/leftSidebar.html",
         0,
         topHeight,
         leftWidth,
@@ -50,6 +51,7 @@ function createWindow() {
 
     createBrowserView(
         win,
+        // "test/test3.html",
         "build/rightSidebar.html",
         screenWidth - rightWidth,
         topHeight,
@@ -60,6 +62,7 @@ function createWindow() {
 
     createBrowserView(
         win,
+        // "test/test1.html",
         "build/topBar.html",
         0,
         0,
@@ -70,7 +73,7 @@ function createWindow() {
 
     win.maximize();
 
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     return win;
 }
 
@@ -81,8 +84,8 @@ function createBrowserView(win, htmlPath, x, y, w, h, color) {
                 nodeIntegration: true,
                 worldSafeExecuteJavaScript: false,
                 contextIsolation: true,
-                experimentalFeatures: true,
-                preload: path.join(__dirname, 'preload.js')
+                // experimentalFeatures: true,
+                // preload: path.join(__dirname, 'preload.js')
             }
         }
     );
