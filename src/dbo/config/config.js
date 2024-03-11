@@ -5,5 +5,4 @@ module.exports = {
   password: null,
   database: null,
   host: null,
-  
 };

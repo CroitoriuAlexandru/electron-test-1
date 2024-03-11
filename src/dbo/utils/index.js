@@ -1,12 +1,16 @@
 const db = require('./../models');
+const aggregateChromeHistory = require('./agregateHistory');
 
-function performDatabaseOperations() {
+
+async function performDatabaseOperations  () {
   db.sequelize.sync()
-    .then(() => db.Post.create({ name: 'Hello World' }))
-    .then(() => db.Post.findAll())
-    .then(posts => {
-      console.log(posts)
-    });
+    // .then(() => db.authToken.create({ access: 'Hello World', refresh: "isueytiksad"}))
+    // .then(() => db.authToken.findAll())
+    // .then(authTokens => {
+    //   console.log(authTokens)
+    // });
+    let history = await aggregateChromeHistory();
+    console.log(history);
 }
 
 // performDatabaseOperations();

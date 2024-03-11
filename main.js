@@ -3,27 +3,29 @@ const { BrowserWindow, app, ipcMain, Notification, BrowserView } = require('elec
 const path = require('path');
 const { createWindow,getBrowserViewsMap } = require('./src/utils/appUI');
 const isDev = !app.isPackaged;
+const performDatabaseOperations = require('./src/dbo/utils'); 
+const db = require('./src/dbo/models');
 let win;
 let browserViewsMap;
+
+db.sequelize.sync()
 
 app.whenReady().then(() => {
   win = createWindow();
   browserViewsMap = getBrowserViewsMap();
   win.loadFile('build/base.html');
+  
+  ipcMain.handle('testToken', getToken);
 }).then(() => {
+
+
+  // performDatabaseOperations();
+  
+  
   // createTopBarView(win);
   // createLeftSideView(win);
-  console.log(win.getBrowserViews());
+  // console.log(win.getBrowserViews());
 })
-function createBrowserView(htmlPath, x, y, w, h) {
-  const view = new BrowserView(
-    { webPreferences: { nodeIntegration: false, contextIsolation: true } }
-  );
-
-  view.setBounds({ x: x, y: y, width: w, height: h })
-  view.webContents.loadFile(htmlPath);
-  win.setBrowserView(view);
-}
 
 if (isDev) {
   require('electron-reload')(__dirname, {
@@ -33,12 +35,12 @@ if (isDev) {
 
 ipcMain.on('notify', (_, message) => {
   console.log(message)
-  // new Notification({ title: 'Notifiation', body: message }).show();
+  new Notification({ title: 'Notifiation', body: message }).show();
 })
 
 ipcMain.on('newURL', (_,url)=>
 {
-  // console.log(url);
+  console.log(url);
   for(const x of win.getBrowserViews()){
     // console.log(x.id)
     if(x.webContents.id === browserViewsMap['cuiWindow']){
@@ -49,6 +51,7 @@ ipcMain.on('newURL', (_,url)=>
   }
 }
 )
+
 ipcMain.on('whatsappURL', (_,url)=>
 {
   // console.log(url);
@@ -62,6 +65,11 @@ ipcMain.on('whatsappURL', (_,url)=>
   }
 }
 )
+ipcMain.on('print', (_,url)=>
+{
+  console.log(url);
+}
+)
 
 ipcMain.handle('my-invokable-ipc', (event, args) => {
   console.log(event);
@@ -73,3 +81,22 @@ ipcMain.handle('my-invokable-ipc', (event, args) => {
   // win.setBrowserView(view);
 
 })
+let tokens = ",msadnfsdf";
+
+ipcMain.handle('getAuthToken', async ()=>{
+  return tokens;
+});
+
+ipcMain.on('setAuthToken', (_,data)=>{
+  let currentTokens = db.authToken.findAll();
+  if(currentTokens){
+    db.authToken.destroy({where: {}});
+    db.authToken.create({access:data.access, refresh:data.refresh});
+  }else {
+    db.authToken.create({access:data.access, refresh:data.refresh});
+  }
+});
+async function getToken(){
+  // console.log(tokens);
+  return tokens;
+}

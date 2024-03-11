@@ -48,7 +48,14 @@ function createWindow() {
             "name": "cuiWindow"
         }
     ];
-    
+    const AuthView = {
+        "htmlPath": "build/auth.html",
+        "x": 0,
+        "y": 0,
+        "w": screenWidth,
+        "h": screenHeight,
+        "name": "auth"
+    }
 
 
     const win = new BrowserWindow({
@@ -64,60 +71,20 @@ function createWindow() {
             preload: path.join(__dirname, './preload.js')
         }
     })
-    win.webContents.openDevTools();
+
+    // win.webContents.openDevTools();
     // console.log(path.join(__dirname, '../../preload.js'))
 
     for(let view of UIViews){
         createBrowserView(win, view);
-        console.log(view);
+        // console.log(view);
     }
+    createBrowserView(win, AuthView);
 
-    // Views:
-    // createBrowserView(
-    //     win,
-    //     // "test/test4.html",
-    //     "build/cuiWindow.html",
-    //     leftWidth,
-    //     topHeight,
-    //     screenWidth - leftWidth - rightWidth,
-    //     screenHeight - topHeight,
-    //     "#00FFFF"
-    // );
 
-    // createBrowserView(
-    //     win,
-    //     // "test/test2.html",
-    //     "build/leftSidebar.html",
-    //     0,
-    //     topHeight,
-    //     leftWidth,
-    //     screenHeight - topHeight,
-    //     "#FF0000"
-    // );
+    // create
 
-    // createBrowserView(
-    //     win,
-    //     // "test/test3.html",
-    //     "build/rightSidebar.html",
-    //     screenWidth - rightWidth,
-    //     topHeight,
-    //     rightWidth,
-    //     screenHeight - topHeight,
-    //     "#FF00FF"
-    // );
-
-    // createBrowserView(
-    //     win,
-    //     // "test/test1.html",
-    //     "build/topBar.html",
-    //     0,
-    //     0,
-    //     screenWidth,
-    //     topHeight,
-    //     "#00FF00"
-    // );
-
-    win.maximize();
+    // win.maximize();
 
     // win.webContents.openDevTools();
     return win;
@@ -138,9 +105,9 @@ function createBrowserView(win, view) {
         }
     );
     newView.setBounds({ x: view.x, y: view.y, width: view.w, height: view.h })
-    // newView.setBackgroundColor(color);
+    newView.setBackgroundColor("rgba(255, 255, 255, 0)");
     newView.webContents.loadFile(view.htmlPath);
-    browserViewsMap[view.name] = newView.webContents.id;
+    browserViewsMap[view.name] = newView;
 
 
     win.addBrowserView(newView);

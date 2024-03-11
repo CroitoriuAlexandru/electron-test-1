@@ -30,5 +30,24 @@ contextBridge.exposeInMainWorld('electron', {
     sendWhatsapp(){
       ipcRenderer.send('whatsappURL',"https://web.whatsapp.com");
     }
+  },
+  login:{
+    setAuthTokens(data){
+      ipcRenderer.send('setAuthToken',data);
+    },
+    getAuthTokens() {
+      ipcRenderer.invoke('getAuthToken').then((result) => {
+        console.log(result);
+        return result;
+      });
+    },
+    test:async ()=>ipcRenderer.invoke('testToken').then((result) => {
+      console.log(result);
+      return result;
+    }),
+    print(message){
+      ipcRenderer.send('print',message);
+    },
+    node: () => process.versions.node,
   }
 });
