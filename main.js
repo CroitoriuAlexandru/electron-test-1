@@ -7,7 +7,7 @@ let win;
 
 app.whenReady().then(() => {
   win = createWindow();
-  win.loadFile('build/rightSidebar.html');
+  win.loadFile('build/base.html');
 }).then(() => {
   // createTopBarView(win);
   // createLeftSideView(win);
