@@ -1,11 +1,15 @@
 // import { ipcRenderer } from "electron";
 // import { ipcRenderer } from "electron";
 import React from "react";
-import { endpoints } from "../utils/endpoints";
+// import { endpoints } from "../utils/endpoints";
+const endpoints = require("./../utils/endpoints");
 
 export default function App() {
   const [incorrectPassword, setIncorrectPassword] = React.useState(false);
   const [incorrectEmail, setIncorrectEmail] = React.useState(false);
+  const [ username, setUsername ] = React.useState("ai@area4u.ro");
+  const [ password, setPassword ] = React.useState("aaa");
+
   const [error, setError] = React.useState("");
   async function LogUserIn(event) {
     event.preventDefault();
@@ -66,6 +70,8 @@ export default function App() {
                           <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                             <div className="relative">
                               <input
+                              value={username}
+                              onChange={(e) => setUsername(e.target.value)}
                                 requierd="true"
                                 autoComplete="off"
                                 id="email"
@@ -84,6 +90,8 @@ export default function App() {
                             </div>
                             <div className="relative">
                               <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 requierd="true"
                                 autoComplete="off"
                                 id="password"

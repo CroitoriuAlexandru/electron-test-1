@@ -26,4 +26,4 @@ const endpoints = {
 };
 
 
-export { endpoints, BACKEND_URL };
+module.exports = endpoints
