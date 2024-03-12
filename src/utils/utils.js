@@ -58,7 +58,12 @@ function createBrowserView(win, view) {
   // newView.setBackgroundColor("rgba(255, 255, 255, 0)");
   if("htmlPath" in view){
     newView.webContents.loadFile(view.htmlPath);
+    if(view.name === "testPage"){
+
+      newView.setBackgroundColor('rgba(17, 24, 39, 0)');
+    } else {
     newView.setBackgroundColor('rgba(17, 24, 39, 1)');
+    }
   }else{
     if(view.urlPath.includes("whatsapp")){
       newView.setBackgroundColor('rgba(249, 250, 251, 1)');

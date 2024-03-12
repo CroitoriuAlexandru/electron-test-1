@@ -75,6 +75,6 @@ typings/
 # Temporary folders
 tmp/
 temp/
-
+pages/
 dist/
 build/
