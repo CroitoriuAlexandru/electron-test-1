@@ -9,11 +9,11 @@ function createWindow() {
 
     const screenWidth = screen.getPrimaryDisplay().size['width'];
     const screenHeight = screen.getPrimaryDisplay().size['height'];
-    
+
     let topHeight = 35;
     let leftWidth = 250;
     let rightWidth = 50;
-    
+
     const UIViews = [
         {
             "htmlPath": "build/topBar.html",
@@ -39,7 +39,7 @@ function createWindow() {
             "h": screenHeight - topHeight,
             "name": "rightSidebar"
         },
-         {
+        {
             "htmlPath": "build/cuiWindow.html",
             "x": leftWidth,
             "y": topHeight,
@@ -50,13 +50,12 @@ function createWindow() {
     ];
     const AuthView = {
         "htmlPath": "build/auth.html",
-        "x": 0,
-        "y": 0,
-        "w": screenWidth,
-        "h": screenHeight,
+        "x": 500,
+        "y": 500,
+        "w": 500,
+        "h": 500,
         "name": "auth"
     }
-
 
     const win = new BrowserWindow({
         width: screenWidth,
@@ -68,28 +67,22 @@ function createWindow() {
             // worldSafeExecuteJavaScript: true,
             contextIsolation: true,
             // experimentalFeatures: true,
-            preload: path.join(__dirname, './preload.js')
+            preload: path.join(__dirname, 'preload.js')
         }
     })
-
     // win.webContents.openDevTools();
     // console.log(path.join(__dirname, '../../preload.js'))
-
-    for(let view of UIViews){
+    for (let view of UIViews) {
         createBrowserView(win, view);
         // console.log(view);
     }
     createBrowserView(win, AuthView);
-
-
     // create
-
     // win.maximize();
-
     // win.webContents.openDevTools();
     return win;
 }
-function getBrowserViewsMap(){
+function getBrowserViewsMap() {
     return browserViewsMap;
 }
 function createBrowserView(win, view) {
@@ -104,6 +97,7 @@ function createBrowserView(win, view) {
             }
         }
     );
+    console.log(__dirname, './preload.js')
     newView.setBounds({ x: view.x, y: view.y, width: view.w, height: view.h })
     newView.setBackgroundColor("rgba(255, 255, 255, 0)");
     newView.webContents.loadFile(view.htmlPath);

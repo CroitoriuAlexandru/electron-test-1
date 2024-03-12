@@ -1,30 +1,12 @@
 // import { ipcRenderer } from "electron";
 // import { ipcRenderer } from "electron";
 import React from "react";
+import { endpoints } from "../utils/endpoints";
 
 export default function App() {
   const [incorrectPassword, setIncorrectPassword] = React.useState(false);
   const [incorrectEmail, setIncorrectEmail] = React.useState(false);
-
-  let electron = window.electron;
-
-  // let tokens;
-  React.useEffect(async () => {
-    // window.electron.notificationApi.sendNotification("Hello from React");
-    // let tokens = electron.login.getAuthToken();
-
-    // electron.login.setAuthTokens("set: asdfawfg");
-    // electron.login.tokens("get: ajhsgdjasd");
-    // console.log(await electron.login.getAuthTokens());
-    // ipcRenderer.on("fromMain", (event, data) => {
-    // console.log(data);
-    // tokens = data;
-    // });
-    // console.log(await electron.login.tokens("get"));
-    console.log(electron.login.node());
-    // electron.login.AuthToken(tokens);
-  }, []);
-
+  const [error, setError] = React.useState("");
   async function LogUserIn(event) {
     event.preventDefault();
     if (event.target.email.value === "") {
@@ -36,8 +18,7 @@ export default function App() {
       return;
     } else setIncorrectPassword(false);
 
-    const response = await fetch(
-      "https://backend-for-browser-production.up.railway.app/api/auth/regular-login/",
+    const response = await fetch(endpoints.login.basic.login,
       {
         method: "POST",
         headers: {
@@ -52,15 +33,16 @@ export default function App() {
     console.log("response = ", response);
     let data = await response.json();
 
-    electron.login.setAuthTokens(data);
+    // await electron.login.setAuthTokens(data);
 
     console.log(data);
     if (data && response.status === 200) {
+      await window.api.db.setToken(data);
       // storageComunicator.authToken.set(data);
       // setAuthTokens(data)
       // setUser(jwtDecode(data.access))
     } else {
-      alert(data.detail);
+      setError(data.detail);
     }
   }
 
@@ -77,6 +59,7 @@ export default function App() {
                     <div className="max-w-md mx-auto">
                       <div>
                         <h1 className="text-2xl font-semibold">Login</h1>
+                        <p>{error}</p>
                       </div>
                       <form onSubmit={LogUserIn}>
                         <div className="divide-y classNamedivide-gray-200">
@@ -93,9 +76,8 @@ export default function App() {
                               />
                               <label
                                 htmlFor="email"
-                                className={`${
-                                  incorrectEmail === false ? "" : "text-red-400"
-                                } absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm`}
+                                className={`${incorrectEmail === false ? "" : "text-red-400"
+                                  } absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm`}
                               >
                                 Email Address
                               </label>
@@ -112,11 +94,10 @@ export default function App() {
                               />
                               <label
                                 htmlFor="password"
-                                className={`${
-                                  incorrectPassword === false
-                                    ? ""
-                                    : "text-red-400"
-                                } absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm`}
+                                className={`${incorrectPassword === false
+                                  ? ""
+                                  : "text-red-400"
+                                  } absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm`}
                               >
                                 Password
                               </label>

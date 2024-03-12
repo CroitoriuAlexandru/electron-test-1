@@ -13,3 +13,4 @@ https://www.techiediaries.com/electron-data-persistence/ ---> To target differen
 ### command to rebuild sqlite3
 
 ./node_modules/.bin/electron-rebuild -f -w sqlite3
+Set-ExecutionPolicy Unrestricted

@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function App() {
 
-  const electron = window.electron;
+  const electron = window.api;
   return (
     <div className="flex flex-col items-center h-[calc(100vh-35px)] w-[50px] py-2 ">
       {/* Office Suite */}

@@ -12,7 +12,7 @@ export default function App() {
       .then(response => response.json())
       .then(data => setData(data));
   }
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchData();
@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   const electron = window.electron;
-  // electron.notifyApi.sendNotification('My custom notification!');
+  window.api.nodify.send('My custom notification!');
 
 
   // <h1 className="text-white">I am App Component!!!</h1>
@@ -31,12 +31,12 @@ export default function App() {
   //   electron.notificationApi.sendNotification('My custom notification!');
   // }}>Notify</button>
 
-//   <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-//   onClick={() => {
-//     let args = "https://www.google.com";
-//     ipcRenderer.invoke('my-invokable-ipc', args)
-//   }}
-// >asd</button>
+  //   <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+  //   onClick={() => {
+  //     let args = "https://www.google.com";
+  //     ipcRenderer.invoke('my-invokable-ipc', args)
+  //   }}
+  // >asd</button>
 
   return (
     <div class="relative p-4">
@@ -64,9 +64,9 @@ export default function App() {
         <div
           class="border-2 border-dashed rounded-lg border-gray-300 dark:border-gray-600 h-32 md:h-64"
         >
-      
 
-        
+
+
 
         </div>
         <div
