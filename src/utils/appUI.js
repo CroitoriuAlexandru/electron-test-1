@@ -65,7 +65,7 @@ function createWindow() {
 
   const UIViews = [
     {
-      htmlPath: "build/topBar.html",
+      htmlPath: "pages/topBar.html",
       x: 0,
       y: 0,
       w: screenWidth,
@@ -73,7 +73,7 @@ function createWindow() {
       name: "topBar",
     },
     {
-      htmlPath: "build/leftSidebar.html",
+      htmlPath: "pages/leftSidebar.html",
       x: 0,
       y: topHeight,
       w: leftWidth,
@@ -81,7 +81,7 @@ function createWindow() {
       name: "leftSidebar",
     },
     {
-      htmlPath: "build/rightSidebar.html",
+      htmlPath: "pages/rightSidebar.html",
       x: screenWidth - rightWidth,
       y: topHeight,
       w: rightWidth,
@@ -89,7 +89,7 @@ function createWindow() {
       name: "rightSidebar",
     },
     {
-      htmlPath: "build/cuiWindow.html",
+      htmlPath: "pages/cuiWindow.html",
       x: leftWidth,
       y: topHeight,
       w: screenWidth - leftWidth - rightWidth,
@@ -97,7 +97,7 @@ function createWindow() {
       name: "cuiWindow",
     },
     {
-        htmlPath: "./build/organigram.html",
+        htmlPath: "./pages/organigram.html",
         x: leftWidth,
         y: topHeight,
         w: screenWidth - leftWidth - rightWidth,
@@ -107,7 +107,7 @@ function createWindow() {
   ];
 
   const AuthView = {
-    htmlPath: "build/auth.html",
+    htmlPath: "pages/auth.html",
     x: 0,
     y: 0,
     w: screenWidth,

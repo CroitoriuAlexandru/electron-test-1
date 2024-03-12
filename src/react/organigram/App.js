@@ -27,8 +27,6 @@ export default function App() {
         })
           .then((res) => res.json())
           .then((data) => {
-            // window.api.printTest(data);
-            // console.log("laksjhflkajsdhfljkahdflajkhsdlfjhasdlfjh", data);
             deps = data.departments;
             ceo = data.ceo;
             employees = data.employees;
@@ -119,7 +117,6 @@ export default function App() {
   };
 
   const initializeChart = async () => {
-    // let users = localStorage.getItem("listUsers");
     console.log("initialize chart");
     await fetchOrganigramInfo();
     chart = new OrgChart(divRef.current, {
@@ -204,8 +201,6 @@ export default function App() {
           template: "invisibleGroup",
           subTreeConfig: {
             siblingSeparation: 10,
-            // align: OrgChart.align.orientation,
-            // orientation: OrgChart.orientation.top_left,
           },
         },
         department: {
@@ -315,12 +310,7 @@ export default function App() {
     OrgChart.templates.customGroupUnasigned.field_2 = "";
     OrgChart.templates.customGroupUnasigned.field_3 = "";
 
-    // '<defs>                         <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">                            <stop id="stop1" stop-color="rgba(248, 117, 55, 1)" offset="0%"></stop>                            <stop id="stop2" stop-color="rgba(251, 168, 31, 1)" offset="100%"></stop>                        </linearGradient>                    </defs>                <path fill="url(#sw-gradient)" d="M24,-27.5C31.8,-22,39.4,-15.1,40.9,-7.2C42.3,0.8,37.7,9.9,32,17.4C26.4,24.8,19.8,30.5,12.1,33.3C4.4,36.1,-4.3,36,-12.4,33.4C-20.5,30.7,-28,25.6,-31,18.7C-34.1,11.8,-32.7,3.1,-31.7,-6.1C-30.7,-15.4,-30.1,-25.2,-24.9,-31.1C-19.6,-37.1,-9.8,-39,-0.9,-38C8.1,-36.9,16.2,-32.9,24,-27.5Z" width="100%" height="100%" transform="translate(50 50)" stroke-width="0" style="transition: all 0.3s ease 0s;"></path>'
-    // '<circle cx="145" cy="0" r="25" fill="#ffffff" stroke="#aeaeae" stroke-width="2"></circle><line x1="130" y1="0" x2="160" y2="0" stroke-width="2" stroke="#aeaeae"></line><line x1="145" y1="-15" x2="145" y2="15" stroke-width="2" stroke="#aeaeae"></line>';
-    // '<text data-width="230" style="font-size: 18px;" fill="#aeaeae" x="{cw}" y="30" text-anchor="middle">'
-    // + '{val}</text>';
-    // '<text data-width="125" data-text-overflow="ellipsis" style="font-size: 15px;" fill="#FF0000" x="15" y="25" text-anchor="start">{val}</text>';
-    // OrgChart.templates.customGroupUnasigned.field_1 = '';
+    
 
     OrgChart.templates.customGroupUnasigned.ripple = {
       radius: 50,
@@ -349,16 +339,8 @@ export default function App() {
       if (draggedNode.tags.includes("big-boss")) return false;
     });
     chart.onNodeClick(function (args) {
-      console.log(args);
-      // console.log(args);
-    //   if (
-    //     args.node.tags.indexOf("unasigned-node-card-style") !== -1 &&
-    //     (args.event.target.hasAttribute("cx") ||
-    //       args.event.target.hasAttribute("x1"))
-    //   ) {
-    //     chart.removeNode(args.node.id);
-    //   } else 
-    // console.log("args", args.event.target.attributes);
+      
+      
     if ( args.event.target.attributes.googlebutton !== undefined){
             console.log("----------",args.node,args.event.target);
         axios.get(endpoints.company.get_user_employees_from_google, {
@@ -465,23 +447,13 @@ export default function App() {
       console.log(e);
     }
   };
-
-  useEffect(async () => {
-    // window.api.printTest(accessToken + "testest");
-    await initializeChart();
-    // window.api.db.getToken().then((result) => {
-    //   accessToken = result.dataValues.access;
-    //   window.api.printTest("-=---------------------------------", accessToken);
-    // });
-  }, []);
-
-  // window.api.db.getToken().then((result)=> {x=result;})
+  
 
   return (
     <div class="text-white border bg-neutral-200 h-[100vh] flex ">
       <button
         onClick={() => {
-          window.api.printTest(accessToken);
+            initializeChart();
         }}
       >
         tralalalalala

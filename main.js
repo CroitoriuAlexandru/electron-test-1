@@ -14,14 +14,19 @@ const {getBrowserViewsMap} = require("./src/utils/utils");
 let win;
 let browserViewsMap;
 
-db.sequelize.sync();
+db.sequelize.sync().then(() => {
+  console.log('Database synchronized successfully.');
+}).catch((error) => {
+  console.error('Failed to synchronize database:', error);
+});
+ 
 
 app
   .whenReady()
   .then(() => {
     win = createWindow();
     browserViewsMap = getBrowserViewsMap();
-    win.loadFile("build/base.html");
+    win.loadFile("pages/base.html");
 
     ipcMain.handle("testToken", getToken);
   });
