@@ -10,6 +10,7 @@ module.exports = {
     leftSidebar: './src/react/leftSidebar/index.js',
     rightSidebar: './src/react/rightSidebar/index.js',
     topBar: './src/react/topBar/index.js',
+    organigram: './src/react/organigram/index.js',
   },
   devtool: 'inline-source-map',
   target: 'electron-renderer',
@@ -86,6 +87,12 @@ module.exports = {
       filename: 'topBar.html',
       inject: false
     }),
+    new HtmlWebpackPlugin({
+      title: 'organigram',
+      template: './src/react/organigram/index.html',
+      filename: 'organigram.html',
+      inject: false
+    })
   ]
 };
 

@@ -6,7 +6,11 @@ contextBridge.exposeInMainWorld('api', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
+  printTest(message) { ipcRenderer.send('printTest', message); },
 
+  topWindow:{
+    setTopView(name){ipcRenderer.send('topView',name);}
+  },
   nodify: {
     send(message) { ipcRenderer.send('notify', message); }
   },

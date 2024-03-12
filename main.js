@@ -6,10 +6,11 @@ const {
   BrowserView,
 } = require("electron");
 const path = require("path");
-const { createWindow, getBrowserViewsMap } = require("./src/utils/appUI");
+const { createWindow } = require("./src/utils/appUI");
 const isDev = !app.isPackaged;
 const performDatabaseOperations = require("./src/dbo/utils");
 const db = require("./src/dbo/models");
+const {getBrowserViewsMap} = require("./src/utils/utils");
 let win;
 let browserViewsMap;
 
@@ -23,26 +24,6 @@ app
     win.loadFile("build/base.html");
 
     ipcMain.handle("testToken", getToken);
-  })
-  .then(() => {
-    // const AuthView = {
-    //   htmlPath: "build/auth.html",
-    //   x: 500,
-    //   y: 500,
-    //   w: 500,
-    //   h: 500,
-    //   name: "auth",
-    // };
-    // db.authToken.findOne().then((result) => {
-    //   console.log("skahjdhfkjhgfjksdgfs", result);
-    //   if (!result) {
-    //     createBrowserView(win, AuthView);
-    //   }
-    // });
-    // performDatabaseOperations();
-    // createTopBarView(win);
-    // createLeftSideView(win);
-    // console.log(win.getBrowserViews());
   });
 
 if (isDev) {
@@ -59,10 +40,7 @@ ipcMain.on("notify", (_, message) => {
 ipcMain.on("newURL", (_, url) => {
   console.log(url);
   // console.log(x.id)
-  browserViewsMap["cuiWindow"].webContents.loadURL(url, {
-    userAgent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.0.0 Safari/537.36",
-  });
+  browserViewsMap["cuiWindow"].webContents.loadURL(url);
   // x.webContents.loadURL(url);
 });
 
@@ -98,3 +76,14 @@ async function getToken() {
   // console.log(tokens);
   return tokens;
 }
+ipcMain.on("topView", (_, name) => {
+  let viewList = win.getBrowserViews();
+  for(const [i,x] of viewList.entries()){
+    if(browserViewsMap[name] === x){
+      win.setTopBrowserView(x);
+    }
+  }
+});
+ipcMain.on("printTest", (_, message) => {
+  console.log(message);
+});
