@@ -130,16 +130,16 @@ function createWindow() {
   });
   // win.webContents.openDevTools();
   // console.log(path.join(__dirname, '../../preload.js'))
-  for (let view of staticLinks) {
-    createBrowserView(win, view);
-    // console.log(view);
-  }
-  for (let view of UIViews) {
-    createBrowserView(win, view);
-    // console.log(view);
-  }
+  // for (let view of staticLinks) {
+  //   createBrowserView(win, view);
+  //   // console.log(view);
+  // }
+  // for (let view of UIViews) {
+  //   createBrowserView(win, view);
+  //   // console.log(view);
+  // }
 
-  checkAuth(win, AuthView);
+  // checkAuth(win, AuthView);
  
   // console.log("jkashgdfjhasgdfkjhagsdfjkhasdgkfjh", authToken)
 

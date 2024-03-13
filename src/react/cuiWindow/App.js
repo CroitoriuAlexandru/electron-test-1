@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   const electron = window.electron;
-  window.api.nodify.send('My custom notification!');
+  // window.api.nodify.send('My custom notification!');
 
 
   // <h1 className="text-white">I am App Component!!!</h1>

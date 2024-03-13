@@ -26,7 +26,9 @@ app
   .then(() => {
     win = createWindow();
     browserViewsMap = getBrowserViewsMap();
-    win.loadFile("pages/base.html");
+    // win.loadFile("pages/base.html");
+    win.loadFile("pages/organigram.html");
+    win.webContents.openDevTools();
 
     ipcMain.handle("testToken", getToken);
   });
