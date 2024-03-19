@@ -89,16 +89,16 @@ function createBrowserView(win, view) {
   // console.log(__dirname, "./preload.js");
   newView.setBounds({ x: view.x, y: view.y, width: view.w, height: view.h });
   // newView.setBackgroundColor("rgba(255, 255, 255, 0)");
-  if (view.urlPath.includes("whatsapp")) {
-    newView.setBackgroundColor("rgba(249, 250, 251, 1)");
-    newView.webContents.loadURL(view.urlPath, {
-      userAgent:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    });
-  } else {
+  // if (view.urlPath.includes("whatsapp")) {
+  //   newView.setBackgroundColor("rgba(249, 250, 251, 1)");
+  //   newView.webContents.loadURL(view.urlPath, {
+  //     userAgent:
+  //       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+  //   });
+  // } else {
     newView.setBackgroundColor("rgba(249, 250, 251, 1)");
     newView.webContents.loadURL(view.urlPath, { userAgent: "" });
-  }
+  // }
   win.addBrowserView(newView);
   return newView;
 }
@@ -137,4 +137,4 @@ function createBrowserView(win, view) {
 //   // win.addBrowserView(newView);
 // }
 
-module.exports = { checkAuth, createBrowserView, getBrowserViewsMap };
+module.exports = { checkAuth, createBrowserView, getBrowserViewsMap, createBrowserHtmlView };

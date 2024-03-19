@@ -14,6 +14,7 @@ const performDatabaseOperations = require("./src/dbo/utils");
 const db = require("./src/dbo/models");
 const {
   getBrowserViewsMap,
+  createBrowserHtmlView,
   createBrowserView,
   checkAuth,
 } = require("./src/utils/utils");
@@ -43,22 +44,22 @@ app.whenReady().then(() => {
             .then(() => {
               console.log("First record with www.google.com added successfully.");
               
-              //! create the bropwser view
-              let newView = new BrowserView({
-                webPreferences: {
-                  nodeIntegration: true,
-                  // worldSafeExecuteJavaScript: false,
-                  contextIsolation: true,
-                  // experimentalFeatures: true,
-                  preload: path.join(__dirname, "./src/utils/preload.js"),
-                } 
-              });
-              newView.setBounds({
-                x: leftWidth,
-                y: topHeight,
-                w: screenWidth - leftWidth - rightWidth,
-                h: screenHeight - topHeight,
-              });
+              // ! create the bropwser view
+              // let newView = new BrowserView({
+              //   webPreferences: {
+              //     nodeIntegration: true,
+              //     // worldSafeExecuteJavaScript: false,
+              //     contextIsolation: true,
+              //     // experimentalFeatures: true,
+              //     preload: path.join(__dirname, "./src/utils/preload.js"),
+              //   } 
+              // });
+              // newView.setBounds({
+              //   x: leftWidth,
+              //   y: topHeight,
+              //   w: screenWidth - leftWidth - rightWidth,
+              //   h: screenHeight - topHeight,
+              // });
 
             })
             .catch((error) => {
@@ -66,28 +67,28 @@ app.whenReady().then(() => {
             });
         }else {
           // get all the tabs
-          db.openTabs.findAll().then((tabs) => {
-            for (const [i, tab] of tabs.entries()) {
-              let newView = new BrowserView({
-                webPreferences: {
-                  nodeIntegration: true,
-                  // worldSafeExecuteJavaScript: false,
-                  contextIsolation: true,
-                  // experimentalFeatures: true,
-                  preload: path.join(__dirname, "preload.js"),
-                },
-              });
-              newView.setBounds({
-                x: leftWidth,
-                y: topHeight,
-                w: screenWidth - leftWidth - rightWidth,
-                h: screenHeight - topHeight,
-              });
-              newView.webContents.loadURL(tab.url);
-              browserViewsMap.openTabs[tab.url] = newView;
+          // db.openTabs.findAll().then((tabs) => {
+          //   for (const [i, tab] of tabs.entries()) {
+          //     let newView = new BrowserView({
+          //       webPreferences: {
+          //         nodeIntegration: true,
+          //         // worldSafeExecuteJavaScript: false,
+          //         contextIsolation: true,
+          //         // experimentalFeatures: true,
+          //         preload: path.join(__dirname, "preload.js"),
+          //       },
+          //     });
+          //     newView.setBounds({
+          //       x: leftWidth,
+          //       y: topHeight,
+          //       w: screenWidth - leftWidth - rightWidth,
+          //       h: screenHeight - topHeight,
+          //     });
+          //     newView.webContents.loadURL(tab.url);
+          //     browserViewsMap.openTabs[tab.url] = newView;
               
-            }
-          });
+          //   }
+          // });
        
         }
       });
@@ -157,8 +158,10 @@ app.whenReady().then(() => {
     },
   });
 
+  win.loadFile("pages/base.html");
   for (let view of UIViews) {
-    browserViewsMap.layoutViews[view.htmlPath] = createBrowserView(win, view);
+    console.log(view)
+    browserViewsMap.layoutViews[view.htmlPath] = createBrowserHtmlView(win, view);
   }
   // console.log(browserViewsMap);
 
@@ -166,8 +169,7 @@ app.whenReady().then(() => {
   // checkAuth(win, AuthView);
   // browserViewsMap = getBrowserViewsMap();
   win.maximize();
-  // win.loadFile("pages/base.html");
-  win.loadFile("pages/leftSidebar.html");
+  // win.loadFile("pages/leftSidebar.html");
   // win.loadFile("pages/leftSidebar.html");
   win.webContents.openDevTools();
   // console.log(getBrowserViewsMap());
@@ -233,6 +235,6 @@ ipcMain.on("printTest", (_, message) => {
 ipcMain.on("setMainWindow", (_, url) => {
   console.log(url);
   console.log(browserViewsMap.layoutViews["pages/cuiWindow.html"]);
-  browserViewsMap.layoutViews["pages/cuiWindow.html"].webContents.loadURL(url);
+  browserViewsMap.layoutViews["pages/cuiWindow.html"].webContents.loadURL("https://www.google.com");
   win.setTopBrowserView(browserViewsMap.layoutViews["pages/cuiWindow.html"]);
 });
